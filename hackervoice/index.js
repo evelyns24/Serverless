@@ -12,7 +12,7 @@ module.exports = async function (context, req) {
     }
     else
     {
-        result="Access denied."
+        result="Access "
     }
 
     context.res = {
