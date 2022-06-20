@@ -8,7 +8,7 @@ module.exports = async function (context, req) {
 
     if (typeof eng === 'undefined' || eng === "") 
     {
-        code = "Please enter some text to convert!"
+        code = "Please enter some text to convert!";
     }
     else 
     {
