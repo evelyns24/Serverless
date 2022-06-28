@@ -18,9 +18,13 @@ module.exports = async function (context, req)
     //module.exports function
     //analyze the image
     const result = await analyzeImage(parts[0].data);
+    let emotions = result[0].faceAttributes.emotion; 
+    let objects = Object.values(emotions);
+    const main_emotion = Object.keys(emotions).find(key => emotions[key] === Math.max(...objects));
+
     context.res = {
         body: {
-            result
+            main_emotion
         }
     };
     console.log(result)
@@ -29,9 +33,11 @@ module.exports = async function (context, req)
 
 async function analyzeImage(img)
 {
-    const subscriptionKey = process.env.SUBSCRIPTIONKEY;
-    const uriBase = process.env.ENDPOINT + '/face/v1.0/detect';
-    
+    //const subscriptionKey = process.env.SUBSCRIPTIONKEY;
+    //const uriBase = process.env.ENDPOINT + '/face/v1.0/detect';
+    const subscriptionKey = '2b46dc89f4624d6ba01b0b629dd94ad0';
+    const uriBase = 'https://placeholdeer-face-api.cognitiveservices.azure.com' +
+                    '/face/v1.0/detect';
 
     let params = new URLSearchParams({
         'returnFaceId': 'true',
